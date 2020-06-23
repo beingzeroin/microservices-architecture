@@ -2,7 +2,7 @@ beingzero-build:
 	docker-compose -f docker-compose.beingzero.yaml build
 
 beingzero-up:
-	docker-compose -f docker-compose.beingzero.yaml up -d
+	docker-compose -f docker-compose.beingzero.yaml up -d --remove-orphans
 
 beingzero-down:
 	docker-compose -f docker-compose.beingzero.yaml down

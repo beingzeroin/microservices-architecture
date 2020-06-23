@@ -11,7 +11,7 @@ curl http://localhost:9000/api/v1/greeting/public -w "\n"
 curl -H "Content-Type: application/json" -H "authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJlaW5nemVybyIsImlhdCI6MTU5MjkxNDM3M30.9-FXa2kahY1TPbS9AFrdGxKSmFK2569DyxYjjyYg7dI" http://localhost:9000/api/v1/greeting/protected -w "\n"
 
 # POST /api/v1/register
-curl -X POST -d '{"username": "beingzero", "password":"beingzero", "email":"beingzeroin@gmail.com"}' -H "Content-Type: application/json" http://localhost:9000/api/v1/register
+curl -X POST -d '{"username": "beingzero", "password":"beingzeroadmin", "email":"beingzeroin@gmail.com"}' -H "Content-Type: application/json" http://localhost:9000/api/v1/register
 
 # POST /api/v1/login
 curl -X POST -d '{"username": "beingzero", "password":"beingzeroadmin"}' -H "Content-Type: application/json" http://localhost:9000/api/v1/login

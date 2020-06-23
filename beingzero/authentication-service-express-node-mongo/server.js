@@ -8,7 +8,7 @@ const jwtLib = require('./backend/lib/jwtLib');
 
 const port = config.web_port
 
-//dbconnect.connect(true);
+dbconnect.connect(true);
 
 app.use(morgan('dev'))
 app.use(express.json())
@@ -27,26 +27,36 @@ app.get('/', function(req, res){
 
 app.post('/api/v1/register', function(req, res){
     logRequest(req);
-    res.json({
-        username: '',
-        token: '',
-        message: ''
-    });
+    userLib.createUser(req.body, function(err, user){
+        if(user){
+            const accessToken = jwtLib.createToken(user);
+            res.json({
+                username: user.username,
+                token: accessToken,
+                message: 'Registration Successful'
+            });
+        }
+        else{
+            res.json({error: err});
+        }
+    })
 })
 app.post('/api/v1/login', function(req, res){
     logRequest(req);
     var user = req.body;
-    if(userLib.isValidUser(user)){
-        const accessToken = jwtLib.createToken(user);
-        res.json({
-            username: user.username,
-            token: accessToken,
-            message: 'Login Successful'
-        });
-    }
-    else{
-        res.json({message: 'Username or password incorrect'});
-    }
+    userLib.isValidUser(user, function(err, userDbObj){
+        if(userDbObj){
+            const accessToken = jwtLib.createToken(user);
+            res.json({
+                username: user.username,
+                token: accessToken,
+                message: 'Login Successful'
+            });
+        }
+        else{
+            res.json({message: 'Username or password incorrect'});
+        }
+    })
 })
 
 

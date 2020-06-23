@@ -10,7 +10,8 @@ services:
     environment:
         SERVICE_NAME: Being Zero Authentication Service
         SERVICE_VERSION: 0.1
-        MONGODB_CONNECTION_STRING: mongodb://root:beingzero@mongo:27017/AuthSvc
+        #MONGODB_CONNECTION_STRING: mongodb://root:beingzero@mongo:27017/authsvc
+        MONGODB_CONNECTION_STRING: mongodb://mongo:27017/authsvc
         PORT: 9000
     depends_on: 
       - mongo
