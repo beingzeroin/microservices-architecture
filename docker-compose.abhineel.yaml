@@ -20,3 +20,9 @@ services:
     ports:
       - "8001:80"
     restart: always
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
