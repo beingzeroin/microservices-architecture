@@ -3,6 +3,8 @@ const app = express()
 const morgan = require('morgan')
 const config = require('./backend/config/globalconfig')
 const dbconnect = require('./backend/db/mongoconnect');
+const userLib = require('./backend/lib/userLib');
+const jwtLib = require('./backend/lib/jwtLib');
 
 const port = config.web_port
 
@@ -33,11 +35,18 @@ app.post('/api/v1/register', function(req, res){
 })
 app.post('/api/v1/login', function(req, res){
     logRequest(req);
-    res.json({
-        username: '',
-        token: '',
-        message: ''
-    });
+    var user = req.body;
+    if(userLib.isValidUser(user)){
+        const accessToken = jwtLib.createToken(user);
+        res.json({
+            username: user.username,
+            token: accessToken,
+            message: 'Login Successful'
+        });
+    }
+    else{
+        res.json({message: 'Username or password incorrect'});
+    }
 })
 
 
@@ -46,7 +55,24 @@ app.get('/api/v1/greeting/public', function(req, res){
 })
 
 app.get('/api/v1/greeting/protected', function(req, res){
-    res.json({  message: "Welcome to Authenticated API" });
+    const authHeader = req.headers.authorization;
+    console.log(authHeader);
+    if (authHeader) {
+        var authHeaderParts = authHeader.split(' ');
+        if(authHeaderParts.length > 1){
+            const token = authHeaderParts[1];
+            jwtLib.verifyToken(token, (err, user) => {
+                if (err) {
+                    return res.sendStatus(403);
+                }
+                res.json({  message: "Welcome to Authenticated API" });
+            });
+        }
+        else
+            res.sendStatus(401);
+    } else {
+        res.sendStatus(401);
+    }
 })
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
