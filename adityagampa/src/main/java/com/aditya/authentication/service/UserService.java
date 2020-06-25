@@ -14,6 +14,9 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 
+	@Autowired
+	JWTTokenService jwtTokenService;
+
 	public LoginResponse getUserLogin(String username, String password) {
 
 		UserRecord userRecord = userRepository.findByUsernameAndPassword(username, password);
@@ -21,9 +24,9 @@ public class UserService {
 			return null;
 		}
 		LoginResponse response = new LoginResponse();
-		response.setJwtToken("123");
+		response.setJwtToken(jwtTokenService.generateToken());
 		response.setUsername(username);
-		response.setMessage("Hello");
+		response.setMessage("Hello!!");
 		return response;
 	}
 

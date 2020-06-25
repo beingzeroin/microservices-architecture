@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aditya.authentication.dto.LoginRequest;
 import com.aditya.authentication.dto.LoginResponse;
+import com.aditya.authentication.service.JWTTokenService;
 import com.aditya.authentication.service.UserService;
 
 @RestController
@@ -15,6 +16,9 @@ public class LoginController {
 
 	@Autowired
 	UserService userSvc;
+
+	@Autowired
+	JWTTokenService jwtTokenService;
 
 	@GetMapping("/test")
 	public String test() {
