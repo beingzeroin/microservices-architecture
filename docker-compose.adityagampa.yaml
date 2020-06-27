@@ -1,14 +1,37 @@
 version: '3.1'
 services:
-    adminer:
-        image: adminer
-        restart: always
-        ports:
-            - 8000:8080
-    
-    db:
-      image: mysql
-      command: --default-authentication-plugin=mysql_native_password
-      restart: always
-      environment:
-        MYSQL_ROOT_PASSWORD: beingzero
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: beingzero
+      MYSQL_DATABASE: USERSTORE
+    volumes:
+      - ./database/seed/mysql-init.sql:/database/seed/mysql-init.sql
+    ports:
+      - 3306:3306
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+      
+  springboot:
+    restart: always
+    build: ./adityagampa
+    depends_on: 
+     - mysql
+    working_dir: /adityagampa
+    volumes:
+      - ./adityagampa:/adityagampa
+      - ~/.m2:/root/.m2
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_DATABASE_NAME: USERSTORE
+      MYSQL_ROOT_USERNAME: root
+      MYSQL_ROOT_PASSWORD: beingzero
+      SPRING_BOOT_APP_PORT: 8089
+    ports: 
+      - 8089:8089
+    command: mvn clean spring-boot:run
