@@ -1,3 +1,7 @@
+CREATE DATABASE IF NOT EXISTS USERSTORE;
+
+use USERSTORE;
+
 DROP TABLE IF EXISTS USER_DATA;
  
 CREATE TABLE USER_DATA (
@@ -8,6 +12,8 @@ CREATE TABLE USER_DATA (
 );
 
 INSERT INTO USER_DATA (username, password, email) values
-	('auser','apass','aemail'),
-	('buser','bpass','bemail'),
-	('cuser','cpass','cemail')
+	('auser','apass','aemail@gmail.com'),
+	('buser','bpass','bemail@gmail.com'),
+	('cuser','cpass','cemail@gmail.com');
+
+COMMIT;
