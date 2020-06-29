@@ -1,0 +1,13 @@
+FROM postgres:9.5
+
+ENV POSTGRES_USER postgres
+
+ENV POSTGRES_PASSWORD postgres
+
+WORKDIR /acesystemdesign/postgresdb
+
+COPY prasanna/pc_microservice_auth_db/init.sql /docker-entrypoint-initdb.d/init.sql
+
+EXPOSE 5432
+
+

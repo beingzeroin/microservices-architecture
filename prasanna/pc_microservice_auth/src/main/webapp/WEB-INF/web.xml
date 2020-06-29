@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app>
+
+<web-app>
+    <servlet>
+        <servlet-name>authenticationservice</servlet-name>
+        <servlet-class>RegistrationService</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loginservice</servlet-name>
+        <servlet-class>LoginService</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>securedgreetingservice</servlet-name>
+        <servlet-class>SecuredGreetingService</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>greetingservice</servlet-name>
+        <servlet-class>GreetingService</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>greetingservice</servlet-name>
+        <url-pattern>/api/v1/greeting/public</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>securedgreetingservice</servlet-name>
+        <url-pattern>/api/v1/greeting/protected</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loginservice</servlet-name>
+        <url-pattern>/api/v1/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>authenticationservice</servlet-name>
+        <url-pattern>/api/v1/register</url-pattern>
+    </servlet-mapping>
+
+</web-app>
