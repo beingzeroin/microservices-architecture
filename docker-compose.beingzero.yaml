@@ -1,0 +1,35 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  authentication-service:
+    build: ./beingzero/authentication-service-express-node-mongo
+    restart: always
+    command: node /app/src/server.js
+    environment:
+        SERVICE_NAME: Being Zero Authentication Service
+        SERVICE_VERSION: 0.1
+        #MONGODB_CONNECTION_STRING: mongodb://root:beingzero@mongo:27017/authsvc
+        MONGODB_CONNECTION_STRING: mongodb://mongo:27017/authsvc
+        PORT: 9000
+    depends_on: 
+      - mongo
+    ports:
+      - 9000:9000
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: beingzero
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 9001:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: beingzero
