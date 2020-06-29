@@ -1,0 +1,27 @@
+$ docker-compose -f docker-compose.prasannachereddy.yaml up -d   
+
+ISSUE#1 db will be up but tomcat is currently exiting after a few seconds 
+
+=======================================================================================
+
+$docker run --name=business_web_2 -p 9000:9000 business_web
+
+ISSUE#2 tomcat will be up on running this but it's currently unable to access postgresdb though links are mentioned in docker-compose file
+
+As a work-around, link it from command in the same network
+
+FIX --> $ docker run -it --link business_postgresdb_1:postgresdb --net business_default --name=business_web_3 -p 9000:9000 business_web 
+
+business_default -> is my default network that docker-compose creates
+postgresdb -> my db service name
+
+#################################################################################
+AUTH SERVICE URLs:
+http://localhost:9000/api/v1/greeting/protected
+http://localhost:9000/api/v1/register
+.
+.
+.
+.
+.
+follows

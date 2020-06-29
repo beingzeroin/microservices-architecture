@@ -1,0 +1,21 @@
+FROM centos
+
+RUN yum -y install maven
+
+WORKDIR /acesystemdesign/authservice
+
+ADD prasanna/pc_microservice_auth/pom.xml /acesystemdesign/authservice/pom.xml
+
+ADD prasanna/pc_microservice_auth/settings.xml /acesystemdesign/authservice/settings.xml
+
+ADD prasanna/pc_microservice_auth/authservice.config /acesystemdesign/authservice/authservice.config
+
+ADD prasanna/pc_microservice_auth/src /acesystemdesign/authservice/src
+
+RUN ["mvn", "compile"]
+
+RUN ["mvn", "package"]
+
+EXPOSE 9000
+ENTRYPOINT ["mvn","tomcat7:run"]
+
