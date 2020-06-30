@@ -1,15 +1,16 @@
-version: '3'
+version: '2.1'
 
 services:
   web:
       build:
-        context: ./Pranav
+        context: ./Pranav/auth-service
         dockerfile: Dockerfile
       command: python __init__.py
       ports:
         - 3000:3000
       depends_on:
-        - db
+        db:
+          condition: service_started
   db:
     image: postgres
     restart: always
@@ -17,3 +18,8 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: password
       POSTGRES_DB: flaskJWT
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 2s
+      retries: 5
