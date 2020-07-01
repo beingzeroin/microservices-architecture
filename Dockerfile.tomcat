@@ -1,6 +1,6 @@
-FROM centos
+FROM maven:3.5-jdk-8
 
-RUN yum -y install maven
+#RUN yum -y install maven
 
 WORKDIR /acesystemdesign/authservice
 
@@ -12,10 +12,10 @@ ADD prasanna/pc_microservice_auth/authservice.config /acesystemdesign/authservic
 
 ADD prasanna/pc_microservice_auth/src /acesystemdesign/authservice/src
 
-RUN ["mvn", "compile"]
+# RUN ["mvn", "compile"]
 
-RUN ["mvn", "package"]
+# RUN ["mvn", "package"]
 
 EXPOSE 9000
-ENTRYPOINT ["mvn","tomcat7:run"]
+# ENTRYPOINT ["mvn","tomcat7:run"]
 

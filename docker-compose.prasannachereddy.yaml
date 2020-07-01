@@ -1,4 +1,4 @@
-version: '3.1'
+version: '2.1'
 
 services:
   postgresdb:
@@ -10,16 +10,27 @@ services:
       - "5432:5432"
     volumes:
       - ".:/acesystemdesign/postgresdb"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   web:
     build:
       context: .
       dockerfile: Dockerfile.tomcat
+    command: "mvn tomcat7:run"
+    restart: always
     ports:
       - "9000:9000"
     volumes:
+      - "~/.m2:/root/.m2"
       - ".:/acesystemdesign/authservice"
     links:
       - postgresdb
+    depends_on:
+      postgresdb:
+        condition: service_healthy
 
 
