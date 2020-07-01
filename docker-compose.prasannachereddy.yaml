@@ -1,0 +1,25 @@
+version: '3.1'
+
+services:
+  postgresdb:
+    build:
+      context: .
+      dockerfile: Dockerfile.postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - ".:/acesystemdesign/postgresdb"
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.tomcat
+    ports:
+      - "9000:9000"
+    volumes:
+      - ".:/acesystemdesign/authservice"
+    links:
+      - postgresdb
+
+

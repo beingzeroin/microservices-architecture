@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings>
+
+    <pluginGroups>
+
+    </pluginGroups>
+
+
+    <proxies>
+
+    </proxies>
+
+
+    <servers>
+
+    </servers>
+
+
+    <mirrors>
+
+    </mirrors>
+
+    <profiles>
+        <profile>
+            <id>cherl</id>
+            <repositories>
+                <repository>
+                    <id>my-alternate-repo</id>
+                    <url>https://mvnrepository.com/artifact/com.google/gson</url>
+                </repository>
+            </repositories>
+        </profile>
+
+    </profiles>
+
+
+</settings>
