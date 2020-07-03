@@ -1,7 +1,7 @@
 version: '2.1'
 
 services:
-  web:
+  auth:
       build:
         context: ./Pranav/auth-service
         dockerfile: Dockerfile
@@ -23,3 +23,14 @@ services:
       interval: 5s
       timeout: 2s
       retries: 5
+
+  catalog:
+    build:
+      context: ./Pranav/catalog-service
+      dockerfile: Dockerfile
+      command: python __init__.py
+      ports:
+        - 3000:3000
+      depends_on:
+        db:
+          condition: service_started
