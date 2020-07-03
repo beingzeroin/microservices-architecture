@@ -1,0 +1,21 @@
+{
+  "availableStock": 10,
+  "catalogBrand": {
+    "brand": "string",
+    "id": 1
+  },
+  "catalogType": {
+    "id": 1,
+    "type": "string"
+  },
+  "deleted": false,
+  "description": "string",
+  "id": 2,
+  "isDeleted": false,
+  "maxstockThreshold": 10,
+  "name": "string",
+  "pictureFileName": "string",
+  "pictureUri": "string",
+  "price": 10,
+  "restockThreshold": 10
+}
