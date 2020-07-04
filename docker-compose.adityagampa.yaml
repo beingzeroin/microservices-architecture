@@ -17,14 +17,14 @@ services:
     ports:
       - 8080:8080
       
-  springboot:
+  authentication:
     restart: always
-    build: ./adityagampa
+    build: ./adityagampa/authentication-service-springboot
     depends_on: 
      - mysql
-    working_dir: /adityagampa
+    working_dir: /adityagampa/authentication-service-springboot
     volumes:
-      - ./adityagampa:/adityagampa
+      - ./adityagampa/authentication-service-springboot:/adityagampa/authentication-service-springboot
       - ~/.m2:/root/.m2
     environment:
       MYSQL_HOST: mysql
@@ -35,3 +35,22 @@ services:
     ports: 
       - 8089:8089
     command: mvn clean spring-boot:run
+    
+  catalog:
+    restart: always
+    build: ./adityagampa/catalog-service-springboot
+    depends_on: 
+     - mysql
+    working_dir: /adityagampa/catalog-service-springboot
+    volumes:
+      - ./adityagampa/catalog-service-springboot:/adityagampa/catalog-service-springboot
+      - ~/.m2:/root/.m2
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_DATABASE_NAME: USERSTORE
+      MYSQL_ROOT_USERNAME: root
+      MYSQL_ROOT_PASSWORD: beingzero
+      SPRING_BOOT_APP_PORT: 8088
+    ports: 
+      - 8088:8088
+    command: mvn clean spring-boot:run    
