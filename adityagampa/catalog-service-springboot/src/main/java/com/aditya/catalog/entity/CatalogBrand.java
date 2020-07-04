@@ -1,38 +1,38 @@
 package com.aditya.catalog.entity;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @Entity
 @Table(name = "CATALOGBRAND")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class CatalogBrand {
 
-	@Id
-	int id;
-	String brand;
+    @Id
+    int id;
+    String brand;
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getBrand() {
-		return brand;
-	}
+    public String getBrand() {
+        return brand;
+    }
 
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
 
-	@Override
-	public String toString() {
-		return "CatalogBrand [id=" + id + ", brand=" + brand + "]";
-	}
+    @Override
+    public String toString() {
+        return "CatalogBrand [id=" + id + ", brand=" + brand + "]";
+    }
 }
