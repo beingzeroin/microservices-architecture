@@ -14,8 +14,8 @@ class CatalogBrand(db.Model):
         self.brand = brand
 
     @classmethod
-    def find_by_id(cls, brand):
-        return cls.query.filter_by(brand=brand).first()
+    def find_by_id(cls, id):
+        return cls.query.filter_by(id=id).first()
 
     @classmethod
     def find_by_name(cls, name):
@@ -24,6 +24,10 @@ class CatalogBrand(db.Model):
     @classmethod
     def find_all(cls):
         return cls.query.all()
+
+    @classmethod
+    def find_all_pagination(cls, page, per_page):
+        return cls.query.order_by(cls.id.asc()).paginate(page, per_page)
 
     def save_to_db(self):
         db.session.add(self)

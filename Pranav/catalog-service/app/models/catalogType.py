@@ -13,8 +13,8 @@ class CatalogType(db.Model):
         self.type = type
 
     @classmethod
-    def find_by_id(cls, type):
-        return cls.query.filter_by(type=type).first()
+    def find_by_id(cls, id):
+        return cls.query.filter_by(id=id).first()
 
     @classmethod
     def find_by_name(cls, name):
@@ -23,6 +23,10 @@ class CatalogType(db.Model):
     @classmethod
     def find_all(cls):
         return cls.query.all()
+
+    @classmethod
+    def find_all_pagination(cls, page, per_page):
+        return cls.query.order_by(cls.id.asc()).paginate(page, per_page)
 
     def save_to_db(self):
         db.session.add(self)
